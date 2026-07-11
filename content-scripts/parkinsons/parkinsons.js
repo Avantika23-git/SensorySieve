@@ -2,10 +2,10 @@ let rawX=0;
 let rawY=0;
 
 document.addEventListener(
-    "mousemove", (event) => {
-    rawX = event.clientX;
-    rawY = event.clientY;
-    console.log("raw:", rawX, rawY);
+    "mousemove", (e) => {
+    rawX = e.clientX;
+    rawY = e.clientY;
+    
 });
 
 
@@ -20,14 +20,13 @@ function updateSmoothCoordinates() {
     requestAnimationFrame(updateSmoothPosition);
 }
 
-
-
 const cursorHideStyle = document.createElement("style");
 cursorHideStyle.id = "ss-parkinsons-hide-cursor";
 cursorHideStyle.textContent = `* { cursor: none !important; }`;
 
 const customerCoursor=document.createElement("div");
 customerCoursor.id="ss-parkinsons-cursor";
+customCursor.style.display = "none";
 document.body.appendChild(customerCursor);
 
 function renderCursor(){
@@ -42,6 +41,7 @@ const debounceMs=400;
 document.addEventListener(
   "click",
   (e) => {
+    if (!isEnabled) return;
     const now = Date.now();
     if (now - lastClickTime < debounceMs) {
       e.stopPropagation();
@@ -51,7 +51,7 @@ document.addEventListener(
     lastClickTime = now;
   },
   true 
-)
+);
 
 const enlargeStyle=document.createElement("style");
 enlargeStyle.id="ss-parkinsons-enlarge";
@@ -62,3 +62,34 @@ enlargeStyle.textContent=`
         transform-origin: center center !important;
         }
         `;
+
+let isEnabled=false;
+
+function enableParkinsonsMode() {
+    if (isEnabled) return;
+    isEnabled = true;
+    document.head.appendChild(cursorHideStyle);
+    document.head.appendChild(enlargeStyle);
+    customCursor.style.display = "block";
+    updateSmoothCoordinates();
+    renderCursor();
+}
+
+function disableParkinsonsMode() {
+    if (!isEnabled) return;
+    isEnabled = false;  
+    cursorHideStyle.remove();
+    enlargeStyle.remove();
+    customCursor.style.display = "none";
+}
+
+chrome.storage.local.get("parkinsonsMode",(result)=>{
+    if(result.parkinsonsMode) enableParkinsonsMode();
+});
+
+
+chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === "local" && "parkinsonsMode" in changes) {
+        changes.parkinsonsMode.newValue? enableParkinsonsMode():disableParkinsonsMode();
+    }  
+});
