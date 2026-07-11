@@ -20,3 +20,17 @@ function updateSmoothCoordinates() {
 }
 
 updateSmoothCoordinates();
+
+const cursorHideStyle = document.createElement("style");
+cursorHideStyle.id = "ss-parkinsons-hide-cursor";
+cursorHideStyle.textContent = `* { cursor: none !important; }`;
+
+const customerCoursor=document.createElement("div");
+customerCoursor.id="ss-parkinsons-cursor";
+document.body.appendChild(customerCursor);
+
+function renderCursor(){
+    customCursor.style.left=smoothX + "px";
+    customCursor.style.top=smoothY + "px";
+    requestAnimationFrame(renderCursor);
+}
