@@ -52,3 +52,13 @@ document.addEventListener(
   },
   true 
 )
+
+const enlargeStyle=document.createElement("style");
+enlargeStyle.id="ss-parkinsons-enlarge";
+enlargeStyle.textContent=`
+        button,a,input,select, textarea ,[role="button"]
+        {
+        transform: scale(1.5) !important;
+        transform-origin: center center !important;
+        }
+        `;
