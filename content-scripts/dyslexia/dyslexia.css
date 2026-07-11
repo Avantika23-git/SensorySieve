@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('chrome-extension://__MSG_@@extension_id__/assets/fonts/OpenDyslexic-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.ss-dyslexia-active,
+.ss-dyslexia-active * {
+    font-family: 'OpenDyslexic', sans-serif !important;
+    line-height: 2.0 !important;
+    letter-spacing: 0.18em !important;
+    text-align: left !important
+}
+
+.ss-dyslexia-active p,
+.ss-dyslexia-active li,
+.ss-dyslexia-active div {
+    margin-bottom: 1.2em !important;
+
+}
+
+.ss-dyslexia-cream * {
+    background-color: transparent !important;
+}
