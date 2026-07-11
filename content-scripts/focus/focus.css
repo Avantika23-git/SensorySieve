@@ -1,0 +1,38 @@
+/* SensorySieve — Focus Mode styles
+   Owner: Tikka
+   All classes are prefixed with ss-focus- so they never collide with
+   the parkinsons/* or dyslexia/* modules. */
+
+/* ---------- 1. Clutter Sieve ---------- */
+/* Added to ads, banners, sidebars, and promo blocks so they blur
+   and lose most of their color, making them fade into the background. */
+.ss-focus-clutter {
+  filter: blur(4px) saturate(40%) !important;
+  transition: filter 0.2s ease-in-out;
+}
+
+/* ---------- 2. Motion Freeze ---------- */
+/* Added to the whole page while Focus Mode is on. Forces any CSS
+   animation or transition to stop moving and hold its current frame. */
+.ss-focus-frozen,
+.ss-focus-frozen * {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
+/* When we swap a GIF <img> for a frozen canvas snapshot, hide the
+   original image and show the snapshot instead. */
+.ss-focus-gif-frozen {
+  display: none !important;
+}
+
+.ss-focus-gif-snapshot {
+  display: inline-block;
+}
+
+/* ---------- 3. Global softening filter ---------- */
+/* Added to the <html> element. Turns down saturation and contrast
+   site-wide so harsh brand colors feel calmer. */
+html.ss-focus-global-filter {
+  filter: saturate(35%) contrast(95%) !important;
+}
