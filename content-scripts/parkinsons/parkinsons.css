@@ -1,0 +1,22 @@
+
+#ss-parkinsons-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  margin-top: -12px;
+  border-radius: 50%;
+  background: rgba(70, 130, 220, 0.85);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  z-index: 2147483647; /* stay above everything, including Focus Mode's overlays */
+  transition: transform 0.05s linear;
+}
+
+.ss-parkinsons-enlarge-target {
+  transform: scale(1.5) !important;
+  transform-origin: center !important;
+}
