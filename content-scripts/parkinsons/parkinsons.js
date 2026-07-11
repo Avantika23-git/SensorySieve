@@ -34,3 +34,20 @@ function renderCursor(){
     customCursor.style.top=smoothY + "px";
     requestAnimationFrame(renderCursor);
 }
+
+let lastClickTime=0;
+const debounceMs=400;
+
+document.addEventListener(
+  "click",
+  (e) => {
+    const now = Date.now();
+    if (now - lastClickTime < debounceMs) {
+      e.stopPropagation();
+      e.preventDefault();
+      return;
+    }
+    lastClickTime = now;
+  },
+  true 
+)
